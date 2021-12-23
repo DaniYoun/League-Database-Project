@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %} 
+    <h1>Teams</h1>
+
+    <form method="POST" action="#">
+      <label>League</label>
+      <select id="leagues" name="leagues" class="form-control">
+          <option value="All">All</option>
+          {% for item in leagues %}
+          <option value={{item[0]}}>{{item[0]}}</option>
+          {% endfor %}
+      </select>
+      
+      <label>Total Number of Games</label>
+      <div class="row">
+        <div class="col">
+          <input name="min" type="number" class="form-control" placeholder="Min" aria-label="Min">
+        </div>
+        <div class="col">
+          <input name="max" type="number" class="form-control" placeholder="Max" aria-label="Max">
+        </div>
+      </div>
+      
+      <input class="btn btn-dark btn-block" type="submit" value="Filter">
+    </form> 
+
+    <table id="data" class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Team Name</th>
+                <th scope="col">League</th>
+                <th scope="col">Total Games Played</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        columns: [
+          {data: 'name'},
+          {data: 'league'},
+          {data: 'games', searchable: false}
+        ],
+      });
+    });
+  </script>
+{% endblock %}

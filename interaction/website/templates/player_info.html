@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block content %} 
+    <h1>{{player}}</h1>
+
+    <p>
+        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#info" aria-expanded="true" aria-controls="info">
+            Player Information
+        </button>
+        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#games" aria-expanded="false" aria-controls="games">
+            Games Played
+        </button>
+        <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#wins" aria-expanded="false" aria-controls="wins">
+            Champion Win Rates
+        </button>
+    </p>
+    <div class="collapse" id="info">
+        <div class="card card-body">
+            <label>Player Info</label>
+            <table id="data" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Position</th>
+                        <th scope="col">Team</th>
+                        <th scope="col">League</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in info %}
+                    <tr>
+                        <td>{{item[1]}}</td>
+                        <td>{{item[2]}}</td>
+                        <td>{{item[3]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>  
+        </div>
+      </div>
+      <div class="collapse" id="games">
+        <div class="card card-body">
+            <label>Games Played</label>
+            <table id="gamez" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Champion</th>
+                        <th scope="col">Length (Minutes)</th>
+                        <th scope="col">Result</th>
+                        <th scope="col"> </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in game_data %}
+                    <tr>
+                        <td>{{item[1]}}</td>
+                        <td>{{item[2]}}</td>
+                        <td>{{item[3]}}</td>
+                        <td><a href="{{ url_for('views.games_withid', game_id = item[0].replace('/', '%2F')) }}">Game Details</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>  
+        </div>
+      </div>
+      <div class="collapse" id="wins">
+        <div class="card card-body">
+            <label>Champion Win Rates</label>
+            <table id="data" class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Champion</th>
+                        <th scope="col">Number of Games</th>
+                        <th scope="col">Win rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in wins %}
+                    <tr>
+                        <td>{{item[0]}}</td>
+                        <td>{{item[1]}}</td>
+                        <td>{{item[2]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>  
+        </div>
+      </div>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    $('#info').collapse({
+        show: true
+      })
+</script>
+
+<script>
+    $(document).ready(function () {
+      $('#gamez').DataTable({
+        columns: [
+          {data: 'name'},
+          {"type": "num", searchable: false},
+          {data: 'result', searchable: false},
+          null
+        ],
+      });
+    });
+  </script>
+{% endblock %}

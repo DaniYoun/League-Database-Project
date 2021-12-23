@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %} 
+    <h1>KDA Rankings: {{league}}</h1>
+
+    <form method="POST" action="#">
+      <label>League</label>
+      <select id="leagues" name="leagues" class="form-control">
+          <option value="All">All</option>
+          {% for item in leagues %}
+          <option value={{item[0]}}>{{item[0]}}</option>
+          {% endfor %}
+      </select>      
+      <input class="btn btn-dark btn-block" type="submit" value="Filter">
+    </form> 
+
+    <table id="data" class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Player Name</th>
+                <th scope="col">Position</th>
+                <th scope="col">KDA</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{data.index(item)+1}}</td>
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        "order": [[ 3, "desc" ]],
+        columns: [
+            null,
+            {data: 'name'},
+            {data: 'position', searchable: false},
+            {"type": "num", searchable: false}
+        ],
+      });
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %} 
+    <h1 id="header">{{ave}}</h1>
+
+    <form method="POST" action="#">
+        <label>Average</label>
+        <select id="average" name="average" class="form-control">
+            <option value="Average KDA">KDA</option>
+            <option value="Average Total Gold">Total Gold</option>
+            <option value="Average Vision Score">Vision score</option>
+            <option value="Average Damage Dealt Per Minute">Damage Dealt Per Minute</option>
+            <option value="Average Taken Delt Per Minute">Damage Taken Per Minute</option>
+        </select>
+        <input class="btn btn-dark btn-block" type="submit" value="Filter">
+    </form> 
+    
+    <table id="data" class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Position</th>
+                <th scope="col" id="ave">Average</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{data.index(item)+1}}</td>
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+            </tr>     
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

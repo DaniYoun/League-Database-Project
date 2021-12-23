@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+
+{% block content %} 
+    <h1>{{team[0][1]}} vs. {{team[1][1]}} ({{team[0][3]}}:{{team[1][3]}})</h1>
+
+    <table id="game" class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">Length</th>
+                <th scope="col">Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in game_data %}
+            <tr>
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <p>
+        <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#ban" aria-expanded="false" aria-controls="collapseExample">
+            Bans
+        </button>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#blue" aria-expanded="false" aria-controls="collapseExample">
+            Blue Team
+        </button>
+        <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#red" aria-expanded="false" aria-controls="collapseExample">
+            Red Team
+        </button>
+    </p>
+      <div class="collapse" id="ban">
+        <div class="card card-body">
+            <table id="ban" class="table-secondary table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Champion Name</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in bans %}
+                    <tr>
+                        <td>{{item[0]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+      </div>
+      <div class="collapse" id="blue">
+        <div class="card card-body">
+            <table id="blue" class="table-primary table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Player Name</th>
+                        <th scope="col">Position</th>
+                        <th scope="col">Champion Name</th>
+                        <th scope="col">Vision Score</th>
+                        <th scope="col">Assists</th>
+                        <th scope="col">Kills</th>
+                        <th scope="col">Total Gold</th>
+                        <th scope="col">Deaths</th>
+                        <th scope="col">Total CS</th>
+                        <th scope="col">Damage To Champions Per Minute</th>
+                        <th scope="col">Damage Taken Per Minute</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in blue %}
+                    <tr>
+                        <td>{{item[0]}}</td>
+                        <td>{{item[1]}}</td>
+                        <td>{{item[2]}}</td>
+                        <td>{{item[3]}}</td>
+                        <td>{{item[4]}}</td>
+                        <td>{{item[5]}}</td>
+                        <td>{{item[6]}}</td>
+                        <td>{{item[7]}}</td>
+                        <td>{{item[8]}}</td>
+                        <td>{{item[9]}}</td>
+                        <td>{{item[10]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+      </div>
+      <div class="collapse" id="red">
+        <div class="card card-body">
+            <table id="red" class="table-danger table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">Player Name</th>
+                        <th scope="col">Position</th>
+                        <th scope="col">Champion Name</th>
+                        <th scope="col">Vision Score</th>
+                        <th scope="col">Assists</th>
+                        <th scope="col">Kills</th>
+                        <th scope="col">Total Gold</th>
+                        <th scope="col">Deaths</th>
+                        <th scope="col">Total CS</th>
+                        <th scope="col">Damage To Champions Per Minute</th>
+                        <th scope="col">Damage Taken Per Minute</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in red %}
+                    <tr>
+                        <td>{{item[0]}}</td>
+                        <td>{{item[1]}}</td>
+                        <td>{{item[2]}}</td>
+                        <td>{{item[3]}}</td>
+                        <td>{{item[4]}}</td>
+                        <td>{{item[5]}}</td>
+                        <td>{{item[6]}}</td>
+                        <td>{{item[7]}}</td>
+                        <td>{{item[8]}}</td>
+                        <td>{{item[9]}}</td>
+                        <td>{{item[10]}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+      </div>
+
+    <table id="game" class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Side</th>
+                <th scope="col">Team Name</th>
+                <th scope="col">League</th>
+                <th scope="col">Kills</th>
+                <th scope="col">Deaths</th>
+                <th scope="col">Dragons</th>
+                <th scope="col">Heralds</th>
+                <th scope="col">Barons</th>
+                <th scope="col">Towers</th>
+                <th scope="col">Inhibitors</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in team %}
+            <tr>
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+                <td>{{item[3]}}</td>
+                <td>{{item[4]}}</td>
+                <td>{{item[5]}}</td>
+                <td>{{item[6]}}</td>
+                <td>{{item[7]}}</td>
+                <td>{{item[8]}}</td>
+                <td>{{item[9]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

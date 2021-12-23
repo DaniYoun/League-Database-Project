@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %} 
+    <h1>Games</h1>
+    <table id="data" class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Blue Team</th>
+                <th scope="col">Red Team</th>
+                <th scope="col">Result (blue win)</th>
+                <th scope="col">Date</th>
+                <th scope="col">Game Length</th>
+                <th scope="col">Patch</th>
+                <th scope="col"> </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+                <td>{{item[3]}}</td>
+                <td>{{item[4]}}</td>
+                <td>{{item[5]}}</td>
+                <td>{{item[6]}}</td>
+                <td><a href="{{ url_for('views.games_withid', game_id = item[0].replace('/', '%2F')) }}">Details</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $(document).ready(function () {
+    $('#data').DataTable({
+      columns: [
+        {data: 'blue'},
+        {data: 'red'},
+        {data: 'result', searchable: false, orderable: false},
+        {data: 'date', searchable: false},
+        {data: 'gameLength', searchable: false},
+        {data: 'patch', searchable: false},
+        null
+      ],
+    });
+  });
+  </script>
+{% endblock %}

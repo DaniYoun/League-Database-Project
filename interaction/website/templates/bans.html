@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %} 
+    <h1>Ban Rates</h1>
+
+    <table id="data" class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Champion Name</th>
+                <th scope="col">Ban Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        columns: [
+          {data: 'name'},
+          {searchable: false},
+        ],
+      });
+    });
+  </script>
+{% endblock %}

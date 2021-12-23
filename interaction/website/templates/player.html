@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %} 
+    <h1>Players</h1>
+    <table id="data" class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Player Name</th>
+                <th scope="col">Position</th>
+                <th scope="col">Team</th>
+                <th scope="col"> </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{item[0]}}</td>
+                <td>{{item[1]}}</td>
+                <td>{{item[2]}}</td>
+                <td><a href="{{ url_for('views.player_info', player_name = item[0]) }}">Details</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        columns: [
+          {data: 'name'},
+          {data: 'position', searchable: false, orderable:false},
+          {data: 'team', orderable:false},
+          null
+        ],
+      });
+    });
+  </script>
+{% endblock %}
